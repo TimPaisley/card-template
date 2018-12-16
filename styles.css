@@ -1,0 +1,173 @@
+*,
+*::before,
+*::after { 
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #f0f0f0;
+}
+
+body {
+    color: #999;
+    font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    padding: 1rem;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga" on;
+}
+
+h1, h2, h3, p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#wrapper {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#header {
+    margin: 0 10px 30px 10px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#header > div {
+    margin-bottom: 10px;
+}
+
+#header h1 {
+    font-size: 2.5rem;
+    font-family: 'Dancing Script', cursive;
+    color: #696969;
+}
+
+#header h3 {
+    font-size: 1rem;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+#footer {
+    font-size: 0.8rem;
+    margin: 30px 10px;
+    text-align: right;
+}
+
+.section-heading {
+    margin: 30px 10px;
+}
+
+.section-heading h2 {
+    font-family: 'Open Sans', sans-serif;
+    margin: 10px 0;
+}
+
+.section-heading p {
+    font-size: 0.9rem;
+}
+
+/*
+CARDS
+
+Adapted from Craig Anthony's Flexbox Card Grid
+https://codepen.io/mcraiganthony/pen/NxGxqm?editors=1100
+*/
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.card-item {
+    display: flex;
+    padding: 0.5rem;
+}
+
+@media (min-width: 40rem) {
+    .card-item {
+        width: 50%;
+    }
+}
+
+@media (min-width: 56rem) {
+    .card-item {
+        width: 33.3333%;
+    }
+}
+
+.card {
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    filter: contrast(70%);
+    overflow: hidden;
+    position: relative;
+    transition: filter 0.5s cubic-bezier(.43,.41,.22,.91);
+}
+
+.image::before {
+    content: "";
+    display: block;
+    padding-top: 56.25%;
+}
+
+@media(min-width: 40rem) {
+    .card::before {
+        padding-top: 66.6%;
+    }
+}
+
+.card:hover .image {
+    filter: contrast(100%);
+}
+
+.title {
+    font-family: 'Open Sans', sans-serif;
+    color: #696969;
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
