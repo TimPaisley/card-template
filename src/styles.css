@@ -1,35 +1,83 @@
-*,
-*::before,
-*::after { 
+/*
+Welcome to the Stylesheet!
+
+You'll notice that this looks a lot different from HTML. This language is called
+CSS, which stands for Cascading Style Sheets. Here, we can define how we want our
+HTML to look when the browser renders it - that includes aspects like colour or font,
+but probably more importantly the layout of the page.
+*/
+
+
+/*
+This is called "universal box sizing", and makes our page a bit nicer to work with.
+Here, we're selecting everything on the page (using the * wildcard) and applying the
+border-box value to box-sizing. The means that an element's width and height values
+will be applied to its content, padding, and border - not just the content.
+
+Don't worry too much if you don't understand this part, it's a bit abstract.
+*/
+
+*, *::before, *::after {
     box-sizing: border-box;
 }
+
+/*
+This will apply a nice light grey colour to our entire page, which tends to make it
+a bit nicer to look at than the default white.
+*/
 
 html {
     background-color: #f0f0f0;
 }
 
+/*
+Here is where we'll start defining some more specific things about our content.
+The Roboto font is applied to the entire body here, but if we can't load it from
+the Google Fonts API (defined in the HEAD of index.html), we can fallback to some
+more common fonts.
+*/
+
 body {
     color: #999;
     font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-style: normal;
-    font-weight: 400;
     text-align: justify;
-    letter-spacing: 0;
     padding: 1rem;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -moz-font-feature-settings: "liga" on;
 }
+
+/*
+By default, headers and paragraph tags have a top and bottom margin applied to them.
+Most of the time I prefer to define that myself, so we're going to reset them here.
+*/
 
 h1, h2, h3, p {
     margin: 0;
 }
 
+/*
+You'll normally see hyperlinks as blue (if you haven't visited the target address) or
+purple (if you have), but those colours are going to clash with our monotone scheme,
+so we're going to inherit whatever colour the text would otherwise be instead.
+
+In the case that the link is within a paragraph tag, we're still going to underline it.
+*/
+
 a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 }
+
+p a {
+    text-decoration: underline;
+}
+
+p a:hover {
+    color: #696969;
+}
+
+/*
+On our article page, we're going to shift our images either to the left or the right
+of the text, depending on the class we give it in HTML.
+*/
 
 img {
     width: 100%;
@@ -46,11 +94,32 @@ img.left {
     float: left;
 }
 
+/*
+On really wide screens, we don't want our cards to take up all the space, as it can
+be annoying to have to turn your head to see everything. We're going to keep the width
+of the content under 960px and use an automatic margin to center everything.
+*/
+
 #wrapper {
     max-width: 960px;
     margin-left: auto;
     margin-right: auto;
 }
+
+/*
+This is the first component of our page, the header. We want to show our title and
+subtitle using some heading tags and make sure they look nice.
+
+This is also the first of many times we're going to use flexbox. You'll notice a lot
+of repeated properties such as "flex-wrap" and "justify-content" throughout our styles,
+but they'll always follow a "display: flex" declaration.
+
+Flexbox is a bit complicated to cover here, but it's a great tool to understand when
+laying out your webpage. Once you're comfortable with flexbox, you'll find yourself
+using it a LOT. Check this out if you want to know more:
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox
+*/
 
 #header {
     margin: 0 10px 30px 10px;
@@ -61,6 +130,12 @@ img.left {
     align-items: center;
 }
 
+/*
+We're going to apply a bottom margin to each div in our header separately so that when
+the screen width is small enough and each element wraps to a new line, we still have
+separation between each of them.
+*/
+
 #header > div {
     margin-bottom: 10px;
 }
@@ -70,6 +145,12 @@ img.left {
     font-family: 'Dancing Script', cursive;
     color: #696969;
 }
+
+/*
+It's a personal preference of mine to use opacity to a lot to denote text hierarchy or
+buttons. It's a useful way to control the impact you want certain parts of your page to
+have without worrying about your colour palette so much.
+*/
 
 #header h3 {
     font-size: 1rem;
@@ -102,9 +183,19 @@ img.left {
 }
 
 /*
-CARDS
+Now that we've got our basic layout looking nice, we'll focus on our list of articles
+on the main page. For that, we'll use cards. Cards are sometimes considered a gimick
+in web design, but when used correctly they can be really effective.
 
-Adapted from Craig Anthony's Flexbox Card Grid
+The purpose of cards is to create a modular, self-contained representation of an item
+that acts as an entry point to find out more. Commonly, you'll find cards used in lists
+where each list item exposes a number of attributes (like the name, age, and height of
+a player on a baseball card). Cards keep all that information in visually appealing
+chunks so the user can easily skim through them to find which one they want.
+
+The following code is adapted from Craig Anthony's Flexbox Card Grid, particularly
+because making cards responsive on different screen sizes is difficult.
+
 https://codepen.io/mcraiganthony/pen/NxGxqm?editors=1100
 */
 
@@ -121,6 +212,11 @@ https://codepen.io/mcraiganthony/pen/NxGxqm?editors=1100
     display: flex;
     padding: 0.5rem;
 }
+
+/*
+These selectors are specifically defined to adjust the width of the cards at different
+screen sizes, and only apply when the minimum width condition is met.
+*/
 
 @media (min-width: 40rem) {
     .card-item {
@@ -152,6 +248,15 @@ https://codepen.io/mcraiganthony/pen/NxGxqm?editors=1100
     flex-direction: column;
     padding: 1rem;
 }
+
+/*
+Normally, we'd use an image tag to represent an image, but in this case the size of the
+image within the card will change depending on the screen width (and hence the width of
+the card).
+
+Using a background image instead helps us arrange the image so it's not stretched or
+repeated, and to make sure it's always centered in the middle of the container.
+*/
 
 .image {
     background-position: center center;
